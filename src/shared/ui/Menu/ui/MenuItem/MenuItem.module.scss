@@ -1,0 +1,36 @@
+.item {
+  list-style: none;
+  border-left: 4px solid transparent;
+  padding-left: 30px;
+  margin-bottom: 25px;
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: $color-gray-600;
+
+    &:hover {
+      .text {
+        color: $color-text;
+      }
+    }
+  }
+
+  .icon,
+  .text {
+    transition: color 150ms ease-in-out;
+  }
+
+  &.active {
+    border-color: $color-primary;
+    .icon {
+      color: $color-primary;
+    }
+
+    .text {
+      color: $color-text;
+    }
+  }
+}

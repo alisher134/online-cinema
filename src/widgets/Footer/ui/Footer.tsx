@@ -1,5 +1,12 @@
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
-  return <footer className={styles.footer}>Footer</footer>;
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className={styles.footer}>
+      <p className={styles.text}>© {year} «Online Cinema»</p>
+      <p className={styles.text}>All rights reserved</p>
+    </footer>
+  );
 };

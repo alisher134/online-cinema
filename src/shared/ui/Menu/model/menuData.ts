@@ -1,12 +1,4 @@
-import {
-  AlarmClockIcon,
-  ClapperboardIcon,
-  ClockIcon,
-  HomeIcon,
-  ListIcon,
-  StarIcon,
-  TvIcon,
-} from 'lucide-react';
+import { ClapperboardIcon, ClockIcon, HomeIcon, SearchIcon, StarIcon, TvIcon } from 'lucide-react';
 
 import { ROUTES } from '@/shared/config/routes';
 
@@ -26,11 +18,6 @@ export const MENU: NavMenu = {
       icon: StarIcon,
     },
     {
-      title: 'Coming Soon',
-      link: ROUTES.comingSoon,
-      icon: AlarmClockIcon,
-    },
-    {
       title: 'Browse',
       link: '/browse',
       icon: ClapperboardIcon,
@@ -46,9 +33,9 @@ export const MENU: NavMenu = {
       icon: ClapperboardIcon,
     },
     {
-      title: 'Genres',
-      link: '/genres',
-      icon: ListIcon,
+      title: 'Search',
+      link: '/search',
+      icon: SearchIcon,
     },
   ],
 };

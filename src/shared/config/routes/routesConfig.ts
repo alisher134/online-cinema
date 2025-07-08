@@ -6,6 +6,12 @@ export const ROUTES = {
   profile: {
     index: '/profile',
     favorites: '/profile/favorites',
+    watchLater: '/profile/watch-later',
     settings: '/profile/settings',
   },
+  auth: {
+    login: '/login',
+    register: '/register',
+  },
+  help: '/help',
 };

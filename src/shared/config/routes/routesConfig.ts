@@ -1,17 +1,45 @@
 export const ROUTES = {
   appRoute: '/',
-  topRated: '/top-rated',
-  comingSoon: '/coming-soon',
-  recentPlayed: '/recent-played',
+  topRated: {
+    route: 'top-rated',
+    page: '/top-rated',
+  },
+  comingSoon: {
+    route: 'coming-soon',
+    page: '/coming-soon',
+  },
+  recentPlayed: {
+    route: 'recent-played',
+    page: '/recent-played',
+  },
   profile: {
-    index: '/profile',
-    favorites: '/profile/favorites',
-    watchLater: '/profile/watch-later',
-    settings: '/profile/settings',
+    route: 'profile',
+    page: '/profile',
+    favorites: {
+      route: 'favorites',
+      page: '/profile/favorites',
+    },
+    watchLater: {
+      route: 'watch-later',
+      page: '/profile/watch-later',
+    },
+    settings: {
+      route: 'settings',
+      page: '/profile/settings',
+    },
   },
   auth: {
-    login: '/login',
-    register: '/register',
+    login: {
+      route: 'login',
+      page: '/login',
+    },
+    register: {
+      route: 'register',
+      page: '/register',
+    },
   },
-  help: '/help',
-};
+  help: {
+    route: 'help',
+    page: '/help',
+  },
+} as const;

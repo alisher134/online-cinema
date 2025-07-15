@@ -1,0 +1,19 @@
+.label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .text {
+    color: $color-gray-500;
+  }
+
+  .link {
+    text-decoration: none;
+    color: $color-primary;
+    transition: color 150ms;
+
+    &:hover {
+      color: $color-primary-hover;
+    }
+  }
+}

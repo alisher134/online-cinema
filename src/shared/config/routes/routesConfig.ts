@@ -29,13 +29,15 @@ export const ROUTES = {
     },
   },
   auth: {
+    route: 'auth',
+    page: '/auth',
     login: {
       route: 'login',
-      page: '/login',
+      page: '/auth/login',
     },
     register: {
       route: 'register',
-      page: '/register',
+      page: '/auth/register',
     },
   },
   help: {

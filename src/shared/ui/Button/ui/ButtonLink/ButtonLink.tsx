@@ -1,11 +1,10 @@
 import clsx from 'clsx';
-import type { AnchorHTMLAttributes } from 'react';
-import { Link } from 'react-router';
+import { Link, type LinkProps } from 'react-router';
 
 import type { ButtonSize, ButtonVariant } from '../../model/buttonTypes';
 import styles from '../Button/Button.module.scss';
 
-interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
+interface ButtonLinkProps extends LinkProps {
   to: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -18,7 +17,7 @@ export const ButtonLink = ({
   size = 'sm',
   children,
   ...props
-}: Props) => {
+}: ButtonLinkProps) => {
   return (
     <Link
       to={to}

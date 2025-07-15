@@ -5,7 +5,7 @@ import type { ButtonSize, ButtonVariant } from '../../model/buttonTypes';
 
 import styles from './Button.module.scss';
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
@@ -16,7 +16,7 @@ export const Button = ({
   size = 'sm',
   children,
   ...props
-}: Props) => {
+}: ButtonProps) => {
   return (
     <button className={clsx(styles.button, styles[variant], styles[size], className)} {...props}>
       {children}

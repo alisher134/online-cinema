@@ -14,7 +14,7 @@ import { MenuItem, MenuList } from '@/shared/ui/Menu';
 import { GENERAL_MENU, LIBRARY_MENU, MENU } from '@/shared/ui/Menu';
 
 export const SidebarMenu = () => {
-  const isAuth = true;
+  const isAuth = false;
   const isAdmin = true;
 
   const renderAuthLibraryMenu = (isAuth: boolean) => {

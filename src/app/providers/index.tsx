@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
-type Props = {
+type ProvidersProps = {
   children: ReactNode;
 };
 
-export const Providers = ({ children }: Props) => {
+export const Providers = ({ children }: ProvidersProps) => {
   return <>{children}</>;
 };

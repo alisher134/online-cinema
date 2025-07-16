@@ -22,6 +22,11 @@
     border-radius: 20px;
   }
 
+  &.full {
+    @extend .lg;
+    width: 100%;
+  }
+
   &.primary {
     background-color: $color-primary;
     color: $color-text;

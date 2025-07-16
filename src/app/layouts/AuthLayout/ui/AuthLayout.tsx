@@ -10,7 +10,7 @@ export const AuthLayout = () => {
       <header>
         <Logo />
       </header>
-      <main>
+      <main className={styles.content}>
         <Outlet />
       </main>
     </div>

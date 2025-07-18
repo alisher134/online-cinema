@@ -1,0 +1,1 @@
+export { publicApi } from './axiosInstance';

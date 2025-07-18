@@ -9,12 +9,14 @@ import {
   UserIcon,
 } from 'lucide-react';
 
+import { useAuth } from '@/entities/auth';
+
 import { ROUTES } from '@/shared/config/routes';
 import { MenuItem, MenuList } from '@/shared/ui/Menu';
 import { GENERAL_MENU, LIBRARY_MENU, MENU } from '@/shared/ui/Menu';
 
 export const SidebarMenu = () => {
-  const isAuth = false;
+  const isAuth = useAuth();
   const isAdmin = true;
 
   const renderAuthLibraryMenu = (isAuth: boolean) => {

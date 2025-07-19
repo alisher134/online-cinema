@@ -9,6 +9,8 @@ import { RegisterPage } from '@/pages/RegisterPage';
 
 import { ROUTES } from '@/shared/config/routes';
 
+import { UnAuthRoute } from '../../auth';
+
 export const router = createBrowserRouter([
   {
     path: ROUTES.appRoute,
@@ -22,7 +24,11 @@ export const router = createBrowserRouter([
   },
   {
     path: ROUTES.auth.route,
-    Component: AuthLayout,
+    Component: () => (
+      <UnAuthRoute>
+        <AuthLayout />
+      </UnAuthRoute>
+    ),
     children: [
       {
         path: ROUTES.auth.login.route,

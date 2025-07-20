@@ -1,5 +1,5 @@
 export { authReducer, authActions } from './model/authSlice';
-export { loginThunk } from './model/authThunks';
+export { loginThunk, registerThunk, logoutThunk } from './model/authThunks';
 export { selectIsAuth, selectIsAuthLoading } from './model/authSelectors';
 export { useAuth } from './hooks/useAuth';
 export {
@@ -7,3 +7,5 @@ export {
   removeAccessTokenFromCookie,
   setAccessTokenToCookie,
 } from './lib/authCookies';
+
+export * from './model/authTypes';

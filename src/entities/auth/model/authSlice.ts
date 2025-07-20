@@ -1,33 +1,59 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { loginThunk } from './authThunks';
+import { loginThunk, logoutThunk, registerThunk } from './authThunks';
 import type { AuthState } from './authTypes';
 
 const initialState: AuthState = {
-  loading: 'idle',
-  isAuth: false,
+  authStatus: 'idle',
+  isLoggedIn: false,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
+  selectors: {
+    isAuth: (state) => state.isLoggedIn,
+    isAuthLoading: (state) => state.authStatus === 'pending',
+  },
   reducers: {
-    setIsAuth(state, action: PayloadAction<boolean>) {
-      state.isAuth = action.payload;
+    setIsLoggedIn(state, action: PayloadAction<boolean>) {
+      state.isLoggedIn = action.payload;
     },
   },
   extraReducers(builder) {
     builder
       .addCase(loginThunk.pending, (state) => {
-        state.loading = 'pending';
+        state.authStatus = 'pending';
       })
       .addCase(loginThunk.fulfilled, (state) => {
-        state.loading = 'succeeded';
-        state.isAuth = true;
+        state.authStatus = 'success';
+        state.isLoggedIn = true;
       })
       .addCase(loginThunk.rejected, (state) => {
-        state.loading = 'failed';
-        state.isAuth = false;
+        state.authStatus = 'failed';
+        state.isLoggedIn = false;
+      })
+      .addCase(registerThunk.pending, (state) => {
+        state.authStatus = 'pending';
+      })
+      .addCase(registerThunk.fulfilled, (state) => {
+        state.authStatus = 'success';
+        state.isLoggedIn = true;
+      })
+      .addCase(registerThunk.rejected, (state) => {
+        state.authStatus = 'failed';
+        state.isLoggedIn = false;
+      })
+      .addCase(logoutThunk.pending, (state) => {
+        state.authStatus = 'pending';
+      })
+      .addCase(logoutThunk.fulfilled, (state) => {
+        state.authStatus = 'success';
+        state.isLoggedIn = false;
+      })
+      .addCase(logoutThunk.rejected, (state) => {
+        state.authStatus = 'failed';
+        state.isLoggedIn = false;
       });
   },
 });

@@ -1,14 +1,8 @@
 import clsx from 'clsx';
-import type { ButtonHTMLAttributes } from 'react';
 
-import type { ButtonSize, ButtonVariant } from '../../model/buttonTypes';
+import type { ButtonProps } from '../../model/buttonTypes';
 
 import styles from './Button.module.scss';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-}
 
 export const Button = ({
   className,

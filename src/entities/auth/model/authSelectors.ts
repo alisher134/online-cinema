@@ -1,4 +1,4 @@
-import type { RootState } from '@/app/providers/store';
+import { authSlice } from './authSlice';
 
-export const selectIsAuth = (state: RootState) => state.auth.isAuth;
-export const selectIsAuthLoading = (state: RootState) => state.auth.loading;
+export const selectIsAuth = authSlice.selectors.isAuth;
+export const selectIsAuthLoading = authSlice.selectors.isAuthLoading;

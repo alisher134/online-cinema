@@ -1,6 +1,10 @@
+import type { RegisterFormFields } from '@/widgets/auth/register';
+
+export type AuthStatus = 'idle' | 'pending' | 'success' | 'failed';
+
 export type AuthState = {
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-  isAuth: boolean;
+  authStatus: AuthStatus;
+  isLoggedIn: boolean;
 };
 
 export type AccessToken = {
@@ -8,7 +12,9 @@ export type AccessToken = {
 };
 
 export const AuthTokens = {
-  ACCESS_TOKEN: 'accessToken',
-};
+  ACCESS: 'accessToken',
+} as const;
+
+export type RegisterDto = Omit<RegisterFormFields, 'confirmPassword'>;
 
 export type AuthResponse = AccessToken;

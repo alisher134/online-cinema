@@ -8,16 +8,28 @@ import {
   SettingsIcon,
   UserIcon,
 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 import { useAuth } from '@/entities/auth';
+import { logoutThunk } from '@/entities/auth';
 
 import { ROUTES } from '@/shared/config/routes';
-import { MenuItem, MenuList } from '@/shared/ui/Menu';
-import { GENERAL_MENU, LIBRARY_MENU, MENU } from '@/shared/ui/Menu';
+import { useAppDispatch } from '@/shared/hooks';
+import { errorHandler } from '@/shared/libs';
+import { GENERAL_MENU, LIBRARY_MENU, MENU, MenuItem, MenuList } from '@/shared/ui/Menu';
 
 export const SidebarMenu = () => {
   const isAuth = useAuth();
   const isAdmin = true;
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = async () => {
+    const resultAction = await dispatch(logoutThunk());
+
+    if (logoutThunk.fulfilled.match(resultAction)) toast.success('Logout was successful');
+    if (logoutThunk.rejected.match(resultAction)) toast.error(errorHandler(resultAction.error));
+  };
 
   const renderAuthLibraryMenu = (isAuth: boolean) => {
     if (!isAuth) return null;
@@ -41,7 +53,7 @@ export const SidebarMenu = () => {
         {isAdmin && <MenuItem title="Admin panel" link="/admin" icon={LockIcon} />}
         <MenuItem title="Settings" link={ROUTES.profile.settings.page} icon={SettingsIcon} />
         <MenuItem title="Help & Support" link={ROUTES.help.page} icon={HelpCircleIcon} />
-        <MenuItem title="Logout" link={ROUTES.profile.page} icon={LogOutIcon} />
+        <MenuItem title="Logout" onClick={handleLogout} icon={LogOutIcon} />
       </>
     );
   };
@@ -50,11 +62,9 @@ export const SidebarMenu = () => {
     <nav>
       <MenuList menu={MENU} />
 
-      <MenuList menu={LIBRARY_MENU} />
-      {renderAuthLibraryMenu(isAuth)}
+      <MenuList menu={LIBRARY_MENU} renderItems={renderAuthLibraryMenu(isAuth)} />
 
-      <MenuList menu={GENERAL_MENU} />
-      {renderGeneralMenu(isAuth)}
+      <MenuList menu={GENERAL_MENU} renderItems={renderGeneralMenu(isAuth)} />
     </nav>
   );
 };

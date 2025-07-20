@@ -1,12 +1,12 @@
-import { LoginCreateForm } from '@/widgets/auth/login';
+import { LoginFormProvider } from '@/widgets/auth/login';
 
 import styles from './LoginPage.module.scss';
 
 export const LoginPage = () => {
   return (
     <section className={styles.login}>
-      <h1 className={styles.title}>Hey there, welcome back</h1>
-      <LoginCreateForm />
+      <h2 className={styles.title}>Hey there, welcome back</h2>
+      <LoginFormProvider />
     </section>
   );
 };

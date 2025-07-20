@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 
 export interface NavMenuItem {
-  link: string;
+  link?: string;
   title: string;
   icon: LucideIcon;
 }

@@ -3,10 +3,18 @@
 
   .content {
     margin-left: 20%;
+
+    @media screen and (max-width: 1024px) {
+      margin: 0;
+    }
   }
 
   .main {
     padding: $layout-padding;
     min-height: 100vh;
+
+    @media screen and (max-width: 1024px) {
+      padding: $layout-mob-padding;
+    }
   }
 }

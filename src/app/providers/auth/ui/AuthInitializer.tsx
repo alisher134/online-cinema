@@ -10,7 +10,7 @@ export const AuthInitializer = () => {
   useEffect(() => {
     const accessToken = getAccessTokenFromCookies();
 
-    if (accessToken) dispatch(authActions.setIsAuth(true));
+    if (accessToken) dispatch(authActions.setIsLoggedIn(true));
   }, [dispatch]);
 
   return null;

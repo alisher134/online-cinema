@@ -9,7 +9,7 @@ import { loginThunk, selectIsAuthLoading } from '@/entities/auth';
 import { ROUTES } from '@/shared/config/routes';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { errorHandler } from '@/shared/libs';
-import { Button } from '@/shared/ui/Button';
+import { ButtonLoader } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
 
@@ -27,7 +27,7 @@ export const LoginForm = () => {
 
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector(selectIsAuthLoading) === 'pending';
+  const isLoading = useAppSelector(selectIsAuthLoading);
 
   const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
     const resultAction = await dispatch(loginThunk(data));
@@ -62,9 +62,9 @@ export const LoginForm = () => {
         className={styles.input}
       />
 
-      <Button size="full" className={styles.button}>
-        {isLoading ? 'loading' : 'Login'}
-      </Button>
+      <ButtonLoader isLoading={isLoading} size="full" className={styles.button}>
+        Login
+      </ButtonLoader>
     </form>
   );
 };

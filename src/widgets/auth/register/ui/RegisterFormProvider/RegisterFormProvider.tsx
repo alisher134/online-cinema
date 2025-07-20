@@ -1,22 +1,23 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { loginSchema } from '@/widgets/auth/login/model/loginSchema';
-
-import { LoginForm } from '@/features/auth/login';
+import { RegisterForm } from '@/features/auth/register';
 import { AuthSwitch } from '@/features/auth/ui';
 
 import { ROUTES } from '@/shared/config/routes';
 
-export const LoginCreateForm = () => {
+import { registerSchema } from '../../model/registerSchema';
+
+export const RegisterFormProvider = () => {
   const methods = useForm({
     mode: 'onChange',
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   });
+
   return (
     <FormProvider {...methods}>
-      <LoginForm />
-      <AuthSwitch text="Don't have an account?" link={ROUTES.auth.register.page} label="Register" />
+      <RegisterForm />
+      <AuthSwitch text="Already have an account?" link={ROUTES.auth.login.page} label="Login" />
     </FormProvider>
   );
 };

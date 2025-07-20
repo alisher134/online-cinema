@@ -6,6 +6,8 @@
   transition:
     background-color 150ms ease-in-out,
     color 150ms ease-in-out;
+  height: 45px;
+  line-height: 1;
 
   &.sm {
     padding: 10px 25px;

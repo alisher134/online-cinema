@@ -1,9 +1,16 @@
+import type { ReactNode } from 'react';
+
 import type { NavMenu } from '../../model/menuTypes';
 import { MenuItem } from '../MenuItem/MenuItem';
 
 import styles from './MenuList.module.scss';
 
-export const MenuList = ({ menu }: { menu: NavMenu }) => {
+type MenuListProps = {
+  menu: NavMenu;
+  renderItems?: ReactNode;
+};
+
+export const MenuList = ({ menu, renderItems }: MenuListProps) => {
   const { title, items } = menu;
 
   return (
@@ -13,6 +20,7 @@ export const MenuList = ({ menu }: { menu: NavMenu }) => {
         {items.map((item) => (
           <MenuItem key={item.title} title={item.title} link={item.link} icon={item.icon} />
         ))}
+        {renderItems}
       </ul>
     </div>
   );

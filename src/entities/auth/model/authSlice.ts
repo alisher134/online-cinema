@@ -1,11 +1,14 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+
+import { getJSONFromLS } from '@/shared/helpers/local-storage/localStorage';
 
 import { loginThunk, logoutThunk, registerThunk } from './authThunks';
-import type { AuthState } from './authTypes';
+import type { AuthState, User } from './authTypes';
 
 const initialState: AuthState = {
   authStatus: 'idle',
   isLoggedIn: false,
+  user: getJSONFromLS('user'),
 };
 
 export const authSlice = createSlice({
@@ -21,40 +24,35 @@ export const authSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder
-      .addCase(loginThunk.pending, (state) => {
+    builder.addMatcher(
+      isAnyOf(loginThunk.pending, registerThunk.pending, logoutThunk.pending),
+      (state) => {
         state.authStatus = 'pending';
-      })
-      .addCase(loginThunk.fulfilled, (state) => {
+      },
+    );
+
+    builder.addMatcher(
+      isAnyOf(loginThunk.fulfilled, registerThunk.fulfilled),
+      (state, action: PayloadAction<User>) => {
         state.authStatus = 'success';
+        state.user = action.payload;
         state.isLoggedIn = true;
-      })
-      .addCase(loginThunk.rejected, (state) => {
+      },
+    );
+    builder.addMatcher(isAnyOf(logoutThunk.fulfilled), (state) => {
+      state.authStatus = 'success';
+      state.user = null;
+      state.isLoggedIn = false;
+    });
+
+    builder.addMatcher(
+      isAnyOf(loginThunk.rejected, registerThunk.rejected, logoutThunk.rejected),
+      (state) => {
         state.authStatus = 'failed';
+        state.user = null;
         state.isLoggedIn = false;
-      })
-      .addCase(registerThunk.pending, (state) => {
-        state.authStatus = 'pending';
-      })
-      .addCase(registerThunk.fulfilled, (state) => {
-        state.authStatus = 'success';
-        state.isLoggedIn = true;
-      })
-      .addCase(registerThunk.rejected, (state) => {
-        state.authStatus = 'failed';
-        state.isLoggedIn = false;
-      })
-      .addCase(logoutThunk.pending, (state) => {
-        state.authStatus = 'pending';
-      })
-      .addCase(logoutThunk.fulfilled, (state) => {
-        state.authStatus = 'success';
-        state.isLoggedIn = false;
-      })
-      .addCase(logoutThunk.rejected, (state) => {
-        state.authStatus = 'failed';
-        state.isLoggedIn = false;
-      });
+      },
+    );
   },
 });
 

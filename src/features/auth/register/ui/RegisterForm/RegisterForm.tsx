@@ -1,14 +1,10 @@
 import { type SubmitHandler, useFormContext } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router';
 
 import type { RegisterFormFields } from '@/widgets/auth/register';
 
 import { registerThunk, selectIsAuthLoading } from '@/entities/auth';
 
-import { ROUTES } from '@/shared/config/routes';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { errorHandler } from '@/shared/libs';
 import { ButtonLoader } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
@@ -25,23 +21,12 @@ export const RegisterForm = () => {
 
   const dispatch = useAppDispatch();
 
-  const navigate = useNavigate();
-
   const isLoading = useAppSelector(selectIsAuthLoading);
 
   const onSubmit: SubmitHandler<RegisterFormFields> = async (data) => {
     const { confirmPassword, ...rest } = data;
-    const resultAction = await dispatch(registerThunk(rest));
-
-    if (registerThunk.fulfilled.match(resultAction)) {
-      toast.success('Registration was success');
-      navigate(ROUTES.appRoute);
-      reset();
-    }
-
-    if (registerThunk.rejected.match(resultAction)) {
-      toast.error(errorHandler(errorHandler));
-    }
+    await dispatch(registerThunk(rest));
+    reset();
   };
 
   return (

@@ -8,14 +8,12 @@ import {
   SettingsIcon,
   UserIcon,
 } from 'lucide-react';
-import toast from 'react-hot-toast';
 
 import { useAuth } from '@/entities/auth';
 import { logoutThunk } from '@/entities/auth';
 
 import { ROUTES } from '@/shared/config/routes';
 import { useAppDispatch } from '@/shared/hooks';
-import { errorHandler } from '@/shared/libs';
 import { GENERAL_MENU, LIBRARY_MENU, MENU, MenuItem, MenuList } from '@/shared/ui/Menu';
 
 export const SidebarMenu = () => {
@@ -25,10 +23,7 @@ export const SidebarMenu = () => {
   const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
-    const resultAction = await dispatch(logoutThunk());
-
-    if (logoutThunk.fulfilled.match(resultAction)) toast.success('Logout was successful');
-    if (logoutThunk.rejected.match(resultAction)) toast.error(errorHandler(resultAction.error));
+    await dispatch(logoutThunk());
   };
 
   const renderAuthLibraryMenu = (isAuth: boolean) => {
@@ -61,9 +56,7 @@ export const SidebarMenu = () => {
   return (
     <nav>
       <MenuList menu={MENU} />
-
       <MenuList menu={LIBRARY_MENU} renderItems={renderAuthLibraryMenu(isAuth)} />
-
       <MenuList menu={GENERAL_MENU} renderItems={renderGeneralMenu(isAuth)} />
     </nav>
   );

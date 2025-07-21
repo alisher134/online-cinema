@@ -14,7 +14,7 @@ export const MENU: NavMenu = {
     },
     {
       title: 'Top Rated',
-      link: ROUTES.topRated,
+      link: ROUTES.topRated.page,
       icon: StarIcon,
     },
     {
@@ -45,7 +45,7 @@ export const LIBRARY_MENU: NavMenu = {
   items: [
     {
       title: 'Recent Played',
-      link: ROUTES.recentPlayed,
+      link: ROUTES.recentPlayed.page,
       icon: ClockIcon,
     },
   ],

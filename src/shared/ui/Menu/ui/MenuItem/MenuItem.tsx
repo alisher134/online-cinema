@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
 import type { NavMenuItem } from '../../model/menuTypes';
 
@@ -9,7 +9,7 @@ type MenuItemProps = NavMenuItem & {
   onClick?: () => void;
 };
 
-export const MenuItem = ({ title, link, icon, onClick }: MenuItemProps) => {
+export const MenuItem = ({ title, link = '', icon, onClick }: MenuItemProps) => {
   const { pathname } = useLocation();
   const Icon = icon!;
   const active = pathname === link;
@@ -24,9 +24,9 @@ export const MenuItem = ({ title, link, icon, onClick }: MenuItemProps) => {
   if (link) {
     return (
       <li className={clsx(styles.item, { [styles.active]: active })}>
-        <a href={link} className={styles.link}>
+        <Link to={link} className={styles.link}>
           {content}
-        </a>
+        </Link>
       </li>
     );
   }

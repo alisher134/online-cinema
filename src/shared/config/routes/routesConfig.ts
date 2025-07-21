@@ -26,6 +26,14 @@ export const ROUTES = {
     settings: {
       route: 'settings',
       page: '/profile/settings',
+      password: {
+        route: 'password',
+        page: '/profile/settings/password',
+      },
+      dataPrivacy: {
+        route: 'data-privacy',
+        page: '/profile/settings/data-privacy',
+      },
     },
   },
   auth: {

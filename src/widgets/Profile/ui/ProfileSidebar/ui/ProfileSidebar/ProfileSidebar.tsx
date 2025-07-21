@@ -1,4 +1,4 @@
-import { ProfileMenuList } from '../../../ProfileMenu';
+import { ProfileMenuList } from '../ProfileMenu';
 
 import styles from './ProfileSidebar.module.scss';
 

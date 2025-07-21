@@ -7,7 +7,6 @@ import type { AuthState, User } from './authTypes';
 
 const initialState: AuthState = {
   authStatus: 'idle',
-  isLoggedIn: false,
   user: getJSONFromLS('user'),
 };
 
@@ -15,14 +14,10 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   selectors: {
-    isAuth: (state) => state.isLoggedIn,
+    isAuth: (state) => state.user,
     isAuthLoading: (state) => state.authStatus === 'pending',
   },
-  reducers: {
-    setIsLoggedIn(state, action: PayloadAction<boolean>) {
-      state.isLoggedIn = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addMatcher(
       isAnyOf(loginThunk.pending, registerThunk.pending, logoutThunk.pending),
@@ -36,13 +31,11 @@ export const authSlice = createSlice({
       (state, action: PayloadAction<User>) => {
         state.authStatus = 'success';
         state.user = action.payload;
-        state.isLoggedIn = true;
       },
     );
     builder.addMatcher(isAnyOf(logoutThunk.fulfilled), (state) => {
       state.authStatus = 'success';
       state.user = null;
-      state.isLoggedIn = false;
     });
 
     builder.addMatcher(
@@ -50,7 +43,6 @@ export const authSlice = createSlice({
       (state) => {
         state.authStatus = 'failed';
         state.user = null;
-        state.isLoggedIn = false;
       },
     );
   },

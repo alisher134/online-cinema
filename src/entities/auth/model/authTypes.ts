@@ -4,7 +4,6 @@ export type AuthStatus = 'idle' | 'pending' | 'success' | 'failed';
 
 export type AuthState = {
   authStatus: AuthStatus;
-  isLoggedIn: boolean;
   user: User | null;
 };
 
@@ -17,6 +16,10 @@ export interface User {
   password: string;
   avatarPath: string | null;
   role: string;
+  age: string | null;
+  country: string | null;
+  aboutMe: string | null;
+  gender: string | null;
   createdAt: string;
   updatedAt: string;
 }

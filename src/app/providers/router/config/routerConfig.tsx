@@ -6,12 +6,13 @@ import { MainLayout } from '@/app/layouts/MainLayout';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { RegisterPage } from '@/pages/auth/RegisterPage';
+import { EditProfilePage } from '@/pages/profile/EditProfilePage';
 import { ProfilePage } from '@/pages/profile/ProfilePage';
 import { ProfileSettingsPage } from '@/pages/profile/ProfileSettingsPage';
 
 import { ROUTES } from '@/shared/config/routes';
 
-import { UnAuthRoute } from '../../auth';
+import { AuthRoute, UnAuthRoute } from '../../auth';
 
 export const router = createBrowserRouter([
   {
@@ -25,9 +26,9 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.profile.route,
         Component: () => (
-          <>
+          <AuthRoute>
             <Outlet />
-          </>
+          </AuthRoute>
         ),
         children: [
           {
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                Component: () => <section>Edit Profile</section>,
+                Component: EditProfilePage,
               },
               {
                 path: ROUTES.profile.settings.password.route,

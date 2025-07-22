@@ -7,6 +7,7 @@ export const editProfileSchema = z.object({
   phoneNumber: z.string().optional().nullable(),
   aboutMe: z.string().optional().nullable(),
   age: z.string().optional().nullable(),
+  gender: z.string().optional().nullable(),
   country: z.string().optional().nullable(),
   avatarPath: z.string().optional().nullable(),
 });

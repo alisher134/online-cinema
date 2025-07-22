@@ -9,3 +9,9 @@ body {
   background: $background-color;
   color: $color-text;
 }
+
+input {
+  &::-webkit-inner-spin-button {
+    appearance: none;
+  }
+}

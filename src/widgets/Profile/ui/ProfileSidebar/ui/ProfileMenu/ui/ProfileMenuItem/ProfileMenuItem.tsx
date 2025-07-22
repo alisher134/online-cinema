@@ -14,11 +14,13 @@ export const ProfileMenuItem = ({ title, link = '', icon }: NavMenuItem) => {
   return (
     <li className={clsx(styles.item, { [styles.active]: active })}>
       <Link to={link} className={styles.link}>
-        <Icon className={styles.icon} />
-        <span className={styles.text}>{title}</span>
-      </Link>
+        <div className={styles.inner}>
+          <Icon className={styles.icon} />
+          <span className={styles.text}>{title}</span>
+        </div>
 
-      <ChevronRightIcon className={styles.arrow} />
+        <ChevronRightIcon className={styles.arrow} />
+      </Link>
     </li>
   );
 };

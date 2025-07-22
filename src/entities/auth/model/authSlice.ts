@@ -14,7 +14,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   selectors: {
-    isAuth: (state) => state.user,
+    isAuth: (state) => Boolean(state.user),
     isAuthLoading: (state) => state.authStatus === 'pending',
   },
   reducers: {},

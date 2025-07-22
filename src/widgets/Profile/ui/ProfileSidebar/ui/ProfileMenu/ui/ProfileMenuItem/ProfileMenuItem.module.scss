@@ -10,8 +10,8 @@
   .link {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex: 1;
-    gap: 10px;
     padding: 25px 0;
     text-decoration: none;
     font-size: 18px;
@@ -22,6 +22,12 @@
         color: $color-text;
       }
     }
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .arrow {

@@ -45,7 +45,7 @@ export const registerThunk = createAsyncThunk<AuthResponse, RegisterDto, { extra
       setAccessTokenToCookie(accessToken);
       setToLS(USER_LS_KEY, user);
       toast.success(AUTH_MESSAGES.registerSuccess);
-      router.navigate(ROUTES.appRoute);
+      router.navigate(ROUTES.profile.settings.page);
 
       return data;
     } catch (error) {

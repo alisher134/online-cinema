@@ -1,12 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
+import { Select } from '@/shared/ui/Select';
+import { TextArea } from '@/shared/ui/TextArea';
 
-import { editProfileSchema } from '../../model/editProfileSchema';
-import type { EditProfileFormValues } from '../../model/editProfileTypes';
+import { SELECT_GENDER_DATA } from '../model/editProfileData';
+import { editProfileSchema } from '../model/editProfileSchema';
+import type { EditProfileFormValues } from '../model/editProfileTypes';
 
 import styles from './EditProfileForm.module.scss';
 
@@ -15,6 +18,7 @@ export const EditProfileForm = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<EditProfileFormValues>({
@@ -26,6 +30,10 @@ export const EditProfileForm = () => {
       email: user?.email,
       avatarPath: user?.avatarPath,
       phoneNumber: user?.phoneNumber,
+      age: user?.age,
+      aboutMe: user?.aboutMe,
+      country: user?.country,
+      gender: user?.gender,
     },
   });
 
@@ -66,11 +74,26 @@ export const EditProfileForm = () => {
 
       <Input
         {...register('age')}
-        type="string"
+        type="number"
         placeholder="Enter your age"
         error={errors.age}
         label="Age"
         className={styles.input}
+      />
+
+      <Controller
+        name="gender"
+        control={control}
+        render={({ field }) => (
+          <Select
+            {...field}
+            error={errors.gender}
+            label="Gender"
+            placeholder="Select your gender"
+            options={SELECT_GENDER_DATA}
+            className={styles.input}
+          />
+        )}
       />
 
       <Input
@@ -82,9 +105,17 @@ export const EditProfileForm = () => {
         className={styles.input}
       />
 
+      <TextArea
+        {...register('aboutMe')}
+        placeholder="Enter your about me"
+        error={errors.aboutMe}
+        label="About Me"
+        className={styles.input}
+      />
+
       <Input
         {...register('phoneNumber')}
-        type="string"
+        type="number"
         placeholder="Enter your phone number"
         error={errors.phoneNumber}
         label="Phone Number"

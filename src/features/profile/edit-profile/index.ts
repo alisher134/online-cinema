@@ -1,2 +1,2 @@
-export { EditProfileForm } from './ui/EditProfileForm/EditProfileForm';
+export { EditProfileForm } from './ui/EditProfileForm';
 export type { EditProfileFormValues } from './model/editProfileTypes';

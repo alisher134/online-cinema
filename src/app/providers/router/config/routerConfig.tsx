@@ -6,6 +6,7 @@ import { MainLayout } from '@/app/layouts/MainLayout';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { RegisterPage } from '@/pages/auth/RegisterPage';
+import { ChangePasswordPage } from '@/pages/profile/ChangePasswordPage';
 import { EditProfilePage } from '@/pages/profile/EditProfilePage';
 import { ProfilePage } from '@/pages/profile/ProfilePage';
 import { ProfileSettingsPage } from '@/pages/profile/ProfileSettingsPage';
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ROUTES.profile.settings.password.route,
-                Component: () => <section>Password</section>,
+                Component: ChangePasswordPage,
               },
               {
                 path: ROUTES.profile.settings.dataPrivacy.route,

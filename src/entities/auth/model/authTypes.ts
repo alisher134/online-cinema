@@ -15,14 +15,17 @@ export interface User {
   phoneNumber: string | null;
   password: string;
   avatarPath: string | null;
-  role: string;
+  role: UserRole;
   age: string | null;
   country: string | null;
   aboutMe: string | null;
-  gender: string | null;
+  gender: UserGender | null;
   createdAt: string;
   updatedAt: string;
 }
+
+export type UserRole = 'ADMIN' | 'USER';
+export type UserGender = 'MALE' | 'FEMALE';
 
 export type AccessToken = {
   accessToken: string;

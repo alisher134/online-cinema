@@ -33,18 +33,20 @@ export const authSlice = createSlice({
         state.user = action.payload;
       },
     );
+
     builder.addMatcher(isAnyOf(logoutThunk.fulfilled), (state) => {
       state.authStatus = 'success';
       state.user = null;
     });
 
-    builder.addMatcher(
-      isAnyOf(loginThunk.rejected, registerThunk.rejected, logoutThunk.rejected),
-      (state) => {
-        state.authStatus = 'failed';
-        state.user = null;
-      },
-    );
+    builder.addMatcher(isAnyOf(loginThunk.rejected, registerThunk.rejected), (state) => {
+      state.authStatus = 'failed';
+    });
+
+    builder.addMatcher(isAnyOf(logoutThunk.rejected), (state) => {
+      state.authStatus = 'failed';
+      state.user = null;
+    });
   },
 });
 

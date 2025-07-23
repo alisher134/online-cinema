@@ -7,5 +7,5 @@ export {
   removeAccessTokenFromCookie,
   setAccessTokenToCookie,
 } from './lib/authCookies';
-
+export { authApi } from './api/authApi';
 export * from './model/authTypes';

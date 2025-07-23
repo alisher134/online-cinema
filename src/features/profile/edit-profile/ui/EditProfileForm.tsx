@@ -1,7 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
-import { useAppSelector } from '@/shared/hooks';
+import { editProfileThunk, selectEditProfileLoading } from '@/entities/profile';
+
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { Select } from '@/shared/ui/Select';
@@ -37,10 +39,12 @@ export const EditProfileForm = () => {
     },
   });
 
-  const isLoading = false;
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(selectEditProfileLoading);
 
   const onSubmit: SubmitHandler<EditProfileFormValues> = (data) => {
-    console.log(data);
+    dispatch(editProfileThunk(data));
   };
 
   return (

@@ -1,6 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
+import { changePasswordThunk, selectChangePasswordLoading } from '@/entities/profile';
+
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
 
@@ -12,6 +15,7 @@ import styles from './ChangePasswordForm.module.scss';
 export const ChangePasswordForm = () => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<ChangePasswordFormValues>({
@@ -19,10 +23,13 @@ export const ChangePasswordForm = () => {
     resolver: zodResolver(changePasswordSchema),
   });
 
-  const isLoading = false;
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(selectChangePasswordLoading);
 
   const onSubmit: SubmitHandler<ChangePasswordFormValues> = (data) => {
-    console.log(data);
+    dispatch(changePasswordThunk(data));
+    reset();
   };
 
   return (

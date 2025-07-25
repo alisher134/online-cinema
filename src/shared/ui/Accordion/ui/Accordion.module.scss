@@ -1,0 +1,31 @@
+.accordion {
+  background: $color-gray-800;
+  border-radius: 20px;
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    color: $color-white;
+    padding: 15px;
+  }
+
+  .title {
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrapper-content {
+    overflow: hidden;
+    transition: height 150ms;
+  }
+
+  .content {
+    color: $color-gray-600;
+    padding: 0 15px 15px 15px;
+  }
+}

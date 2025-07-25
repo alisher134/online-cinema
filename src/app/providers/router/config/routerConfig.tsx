@@ -7,6 +7,7 @@ import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { RegisterPage } from '@/pages/auth/RegisterPage';
 import { ChangePasswordPage } from '@/pages/profile/ChangePasswordPage';
+import { DataPrivacyPage } from '@/pages/profile/DataPrivacyPage';
 import { EditProfilePage } from '@/pages/profile/EditProfilePage';
 import { ProfilePage } from '@/pages/profile/ProfilePage';
 import { ProfileSettingsPage } from '@/pages/profile/ProfileSettingsPage';
@@ -50,7 +51,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ROUTES.profile.settings.dataPrivacy.route,
-                Component: () => <section>Data privacy</section>,
+                Component: DataPrivacyPage,
               },
             ],
           },

@@ -8,8 +8,8 @@ import { ButtonLoader } from '@/shared/ui/Button';
 import { FormControl } from '@/shared/ui/FormControl';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
 
-import { changePasswordSchema } from '../model/changePasswordSchema';
-import type { ChangePasswordFormValues } from '../model/changePasswordTypes';
+import { changePasswordSchema } from '../model/schema';
+import type { ChangePasswordFormValues } from '../model/types';
 
 import styles from './ChangePasswordForm.module.scss';
 

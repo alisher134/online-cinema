@@ -1,4 +1,4 @@
-import type { ProfileAccordionItem } from './dataPrivacyTypes';
+import type { ProfileAccordionItem } from './types';
 
 export const PROFILE_ACCORDION_DATA: ProfileAccordionItem[] = [
   {

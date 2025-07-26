@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { ChevronUpIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import type { SelectOption } from '../model/selectTypes';
+import type { SelectOption } from '../model/types';
 
 import styles from './Select.module.scss';
 

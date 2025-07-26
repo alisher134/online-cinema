@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { NavMenu } from '../../model/menuTypes';
+import type { NavMenu } from '../../model/types';
 import { MenuItem } from '../MenuItem/MenuItem';
 
 import styles from './MenuList.module.scss';

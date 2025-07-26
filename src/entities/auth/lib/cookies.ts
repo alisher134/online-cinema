@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-import { AuthTokens } from '../model/authTypes';
+import { AuthTokens } from '../model/types';
 
 export const setAccessTokenToCookie = (accessToken: string) => {
   Cookies.set(AuthTokens.ACCESS, accessToken, { secure: true });

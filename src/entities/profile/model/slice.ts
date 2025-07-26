@@ -1,7 +1,7 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { changePasswordThunk, editProfileThunk, loadMeThunk } from './profileThunks';
-import type { ProfileState, User } from './profileTypes';
+import { changePasswordThunk, editProfileThunk, loadMeThunk } from './thunks';
+import type { ProfileState, User } from './types';
 
 const initialState: ProfileState = {
   status: {

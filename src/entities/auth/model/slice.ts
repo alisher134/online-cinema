@@ -1,9 +1,9 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { getAccessTokenFromCookies } from '../lib/authCookies';
+import { getAccessTokenFromCookies } from '../lib/cookies';
 
-import { loginThunk, logoutThunk, registerThunk } from './authThunks';
-import type { AuthState } from './authTypes';
+import { loginThunk, logoutThunk, registerThunk } from './thunks';
+import type { AuthState } from './types';
 
 const initialState: AuthState = {
   authStatus: 'idle',

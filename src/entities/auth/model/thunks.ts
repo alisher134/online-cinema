@@ -10,10 +10,10 @@ import { ROUTES } from '@/shared/config/routes';
 import { removeFromLS } from '@/shared/helpers/local-storage';
 import { errorHandler } from '@/shared/libs';
 
-import { removeAccessTokenFromCookie, setAccessTokenToCookie } from '../lib/authCookies';
+import { removeAccessTokenFromCookie, setAccessTokenToCookie } from '../lib/cookies';
 
-import { AUTH_MESSAGES } from './authConstants';
-import type { AuthResponse, RegisterDto } from './authTypes';
+import { AUTH_MESSAGES } from './constants';
+import type { AuthResponse, RegisterDto } from './types';
 
 export const loginThunk = createAsyncThunk<AuthResponse, LoginFormFields, { extra: ExtraArgument }>(
   'auth/login',

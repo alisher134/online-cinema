@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 import { useAuth } from '@/entities/auth';
-import { logoutThunk } from '@/entities/auth/model/authThunks';
+import { logoutThunk } from '@/entities/auth/model/thunks';
 
 import { ROUTES } from '@/shared/config/routes';
 import { useAppDispatch } from '@/shared/hooks';

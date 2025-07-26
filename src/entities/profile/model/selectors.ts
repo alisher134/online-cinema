@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { profileSlice } from './profileSlice';
+import { profileSlice } from './slice';
 
 export const selectStatus = profileSlice.selectors.selectStatus;
 export const selectUserInfo = profileSlice.selectors.userInfo;

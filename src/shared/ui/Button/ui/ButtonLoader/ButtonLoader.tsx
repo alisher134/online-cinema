@@ -1,6 +1,6 @@
 import { LoaderCircleIcon } from 'lucide-react';
 
-import type { ButtonProps } from '../../model/buttonTypes';
+import type { ButtonProps } from '../../model/types';
 import { Button } from '../Button/Button';
 
 import styles from './ButtonLoader.module.scss';

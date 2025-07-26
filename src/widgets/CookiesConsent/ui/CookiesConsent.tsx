@@ -3,24 +3,19 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { getJSONFromLS, setToLS } from '@/shared/helpers/local-storage';
+import { createRootPortal } from '@/shared/libs';
 import { Button } from '@/shared/ui/Button';
 
 import { COOKIES_CONSENT_LS_KEY, COOKIES_CONSENT_PORTAL_ID } from '../model/constants';
 
 import styles from './CookiesConsent.module.scss';
 
-const createRootPortal = () => {
-  const cookieRoot = document.createElement('div');
-  cookieRoot.setAttribute('id', COOKIES_CONSENT_PORTAL_ID);
-
-  return cookieRoot;
-};
-
 export const CookiesConsent = () => {
   const [isAgreed, setIsAgreed] = useState<boolean>(getJSONFromLS(COOKIES_CONSENT_LS_KEY));
 
   const portalRef = useRef(
-    document.getElementById(COOKIES_CONSENT_PORTAL_ID) || createRootPortal(),
+    document.getElementById(COOKIES_CONSENT_PORTAL_ID) ||
+      createRootPortal('div', { id: COOKIES_CONSENT_PORTAL_ID }),
   );
 
   useEffect(() => {

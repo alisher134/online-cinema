@@ -8,8 +8,8 @@ import type { EditProfileFormValues } from '@/features/profile/edit-profile';
 import { ROUTES } from '@/shared/config/routes';
 import { errorHandler } from '@/shared/libs';
 
-import { EDIT_PROFILE_MESSAGES } from './profileConstants';
-import type { User } from './profileTypes';
+import { EDIT_PROFILE_MESSAGES } from './constants';
+import type { User } from './types';
 
 export const loadMeThunk = createAsyncThunk<User, void, { extra: ExtraArgument }>(
   'profile/load',

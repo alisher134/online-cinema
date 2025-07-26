@@ -2,7 +2,7 @@ import { ClapperboardIcon, ClockIcon, HomeIcon, SearchIcon, StarIcon, TvIcon } f
 
 import { ROUTES } from '@/shared/config/routes';
 
-import type { NavMenu } from './menuTypes';
+import type { NavMenu } from './types';
 
 export const MENU: NavMenu = {
   title: 'Menu',

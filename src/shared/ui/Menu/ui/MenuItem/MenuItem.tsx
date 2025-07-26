@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Link, useLocation } from 'react-router';
 
-import type { NavMenuItem } from '../../model/menuTypes';
+import type { NavMenuItem } from '../../model/types';
 
 import styles from './MenuItem.module.scss';
 

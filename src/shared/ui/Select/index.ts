@@ -1,2 +1,2 @@
-export type { SelectOption } from './model/selectTypes';
+export type { SelectOption } from './model/types';
 export { Select } from './ui/Select';

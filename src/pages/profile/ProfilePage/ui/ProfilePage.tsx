@@ -2,7 +2,7 @@ import { selectIsLoadMeLoading, selectUserInfo } from '@/entities/profile';
 
 import { useAppSelector } from '@/shared/hooks';
 
-import { PROFILE_GENDERS } from '../model/profileData';
+import { PROFILE_GENDERS } from '../model/data';
 
 const ProfilePage = () => {
   const user = useAppSelector(selectUserInfo);

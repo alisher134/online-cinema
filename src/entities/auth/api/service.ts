@@ -4,10 +4,10 @@ import type { User } from '@/entities/profile';
 
 import { axiosInstance, publicApi } from '@/shared/api';
 
-import { AUTH_API_URLS } from '../model/authConstants';
-import type { AccessToken, AuthResponse, RegisterDto } from '../model/authTypes';
+import { AUTH_API_URLS } from '../model/constants';
+import type { AccessToken, AuthResponse, RegisterDto } from '../model/types';
 
-export const authApi = {
+export const authService = {
   async getMe() {
     return axiosInstance.get<User>(AUTH_API_URLS.getMe);
   },

@@ -1,4 +1,4 @@
-import type { RegisterFormFields } from '@/widgets/auth/register';
+import type { RegisterFormFields } from '@/features/auth/register';
 
 export type AuthStatus = 'idle' | 'pending' | 'success' | 'failed';
 

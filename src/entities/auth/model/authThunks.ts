@@ -4,13 +4,15 @@ import type { ExtraArgument } from '@/app/providers/store';
 
 import type { LoginFormFields } from '@/widgets/auth/login';
 
+import { USER_LS_KEY } from '@/entities/profile';
+
 import { ROUTES } from '@/shared/config/routes';
-import { removeFromLS, setToLS } from '@/shared/helpers/local-storage';
+import { removeFromLS } from '@/shared/helpers/local-storage';
 import { errorHandler } from '@/shared/libs';
 
 import { removeAccessTokenFromCookie, setAccessTokenToCookie } from '../lib/authCookies';
 
-import { AUTH_MESSAGES, USER_LS_KEY } from './authConstants';
+import { AUTH_MESSAGES } from './authConstants';
 import type { AuthResponse, RegisterDto } from './authTypes';
 
 export const loginThunk = createAsyncThunk<AuthResponse, LoginFormFields, { extra: ExtraArgument }>(
@@ -19,10 +21,10 @@ export const loginThunk = createAsyncThunk<AuthResponse, LoginFormFields, { extr
     try {
       const { data } = await api.auth.login(dto);
 
-      const { accessToken, ...user } = data;
+      const { accessToken } = data;
 
       setAccessTokenToCookie(accessToken);
-      setToLS(USER_LS_KEY, user);
+
       toast.success(AUTH_MESSAGES.loginSuccess);
       router.navigate(ROUTES.appRoute);
 
@@ -40,10 +42,10 @@ export const registerThunk = createAsyncThunk<AuthResponse, RegisterDto, { extra
     try {
       const { data } = await api.auth.register(dto);
 
-      const { accessToken, ...user } = data;
+      const { accessToken } = data;
 
       setAccessTokenToCookie(accessToken);
-      setToLS(USER_LS_KEY, user);
+
       toast.success(AUTH_MESSAGES.registerSuccess);
       router.navigate(ROUTES.profile.settings.page);
 

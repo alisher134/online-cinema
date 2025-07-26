@@ -1,20 +1,20 @@
-import { type PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { getJSONFromLS } from '@/shared/helpers/local-storage/localStorage';
+import { getAccessTokenFromCookies } from '../lib/authCookies';
 
 import { loginThunk, logoutThunk, registerThunk } from './authThunks';
-import type { AuthState, User } from './authTypes';
+import type { AuthState } from './authTypes';
 
 const initialState: AuthState = {
   authStatus: 'idle',
-  user: getJSONFromLS('user'),
+  isAuth: !!getAccessTokenFromCookies(),
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   selectors: {
-    isAuth: (state) => Boolean(state.user),
+    isAuth: (state) => state.isAuth,
     isAuthLoading: (state) => state.authStatus === 'pending',
   },
   reducers: {},
@@ -23,29 +23,28 @@ export const authSlice = createSlice({
       isAnyOf(loginThunk.pending, registerThunk.pending, logoutThunk.pending),
       (state) => {
         state.authStatus = 'pending';
+        state.isAuth = false;
       },
     );
 
-    builder.addMatcher(
-      isAnyOf(loginThunk.fulfilled, registerThunk.fulfilled),
-      (state, action: PayloadAction<User>) => {
-        state.authStatus = 'success';
-        state.user = action.payload;
-      },
-    );
+    builder.addMatcher(isAnyOf(loginThunk.fulfilled, registerThunk.fulfilled), (state) => {
+      state.authStatus = 'success';
+      state.isAuth = true;
+    });
 
     builder.addMatcher(isAnyOf(logoutThunk.fulfilled), (state) => {
       state.authStatus = 'success';
-      state.user = null;
+      state.isAuth = false;
     });
 
     builder.addMatcher(isAnyOf(loginThunk.rejected, registerThunk.rejected), (state) => {
       state.authStatus = 'failed';
+      state.isAuth = false;
     });
 
     builder.addMatcher(isAnyOf(logoutThunk.rejected), (state) => {
       state.authStatus = 'failed';
-      state.user = null;
+      state.isAuth = false;
     });
   },
 });

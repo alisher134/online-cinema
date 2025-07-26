@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 
+import { AuthProvider } from './auth';
 import { StoreProvider } from './store';
 
 type ProvidersProps = {
@@ -10,8 +11,10 @@ type ProvidersProps = {
 export const Providers = ({ children }: ProvidersProps) => {
   return (
     <StoreProvider>
-      {children}
-      <Toaster />
+      <AuthProvider>
+        {children}
+        <Toaster />
+      </AuthProvider>
     </StoreProvider>
   );
 };

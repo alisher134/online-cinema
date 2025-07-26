@@ -1,1 +1,1 @@
-export type { RequestStatus } from './reduxTypes';
+export { RequestStatus } from './reduxTypes';

@@ -1,12 +1,11 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import type { User } from '@/entities/auth';
-
-import { changePasswordThunk, editProfileThunk } from './profileThunks';
-import type { ProfileState } from './profileTypes';
+import { changePasswordThunk, editProfileThunk, loadMeThunk } from './profileThunks';
+import type { ProfileState, User } from './profileTypes';
 
 const initialState: ProfileState = {
-  profileStatuses: {
+  status: {
+    loadMe: 'idle',
     editProfile: 'idle',
     changePassword: 'idle',
   },
@@ -19,30 +18,43 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   selectors: {
-    editProfileIsLoading: (state) => state.profileStatuses.editProfile === 'pending',
-    changePasswordIsLoading: (state) => state.profileStatuses.changePassword === 'pending',
+    selectStatus: (state) => state.status,
+    userInfo: (state) => state.userInfo,
   },
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(loadMeThunk.pending, (state) => {
+        state.status.loadMe = 'pending';
+      })
+      .addCase(loadMeThunk.fulfilled, (state, action: PayloadAction<User>) => {
+        state.status.loadMe = 'success';
+        state.userInfo = action.payload;
+      })
+      .addCase(loadMeThunk.rejected, (state) => {
+        state.status.loadMe = 'failed';
+        state.userInfo = null;
+      })
+
       .addCase(editProfileThunk.pending, (state) => {
-        state.profileStatuses.editProfile = 'pending';
+        state.status.editProfile = 'pending';
       })
       .addCase(editProfileThunk.fulfilled, (state, action: PayloadAction<User>) => {
-        state.profileStatuses.editProfile = 'success';
+        state.status.editProfile = 'success';
         state.userInfo = action.payload;
       })
       .addCase(editProfileThunk.rejected, (state) => {
-        state.profileStatuses.editProfile = 'failed';
+        state.status.editProfile = 'failed';
       })
+
       .addCase(changePasswordThunk.pending, (state) => {
-        state.profileStatuses.changePassword = 'pending';
+        state.status.changePassword = 'pending';
       })
       .addCase(changePasswordThunk.fulfilled, (state) => {
-        state.profileStatuses.changePassword = 'success';
+        state.status.changePassword = 'success';
       })
       .addCase(changePasswordThunk.rejected, (state) => {
-        state.profileStatuses.changePassword = 'failed';
+        state.status.changePassword = 'failed';
       });
   },
 });

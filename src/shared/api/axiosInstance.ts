@@ -1,12 +1,14 @@
 import axios, { type CreateAxiosDefaults } from 'axios';
 
-import { authApi, getAccessTokenFromCookies, setAccessTokenToCookie } from '@/entities/auth';
-
-import { ENV_CONFIG } from '../config/env';
-import { ROUTES } from '../config/routes';
+import {
+  authApi,
+  getAccessTokenFromCookies,
+  removeAccessTokenFromCookie,
+  setAccessTokenToCookie,
+} from '@/entities/auth';
 
 const AxiosConfig: CreateAxiosDefaults = {
-  baseURL: ENV_CONFIG.apiUrl,
+  baseURL: '/api/v1',
   withCredentials: true,
 };
 
@@ -34,7 +36,8 @@ axiosInstance.interceptors.response.use(
 
         return axiosInstance(originalRequest);
       } catch (error) {
-        window.location.href = ROUTES.auth.login.page;
+        removeAccessTokenFromCookie();
+        await authApi.logout();
         return Promise.reject(error);
       }
     }

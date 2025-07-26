@@ -1,11 +1,17 @@
 import type { LoginFormFields } from '@/widgets/auth/login';
 
-import { publicApi } from '@/shared/api';
+import type { User } from '@/entities/profile';
+
+import { axiosInstance, publicApi } from '@/shared/api';
 
 import { AUTH_API_URLS } from '../model/authConstants';
 import type { AccessToken, AuthResponse, RegisterDto } from '../model/authTypes';
 
 export const authApi = {
+  async getMe() {
+    return axiosInstance.get<User>(AUTH_API_URLS.getMe);
+  },
+
   async login(dto: LoginFormFields) {
     return publicApi.post<AuthResponse>(AUTH_API_URLS.login, dto);
   },

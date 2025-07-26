@@ -1,27 +1,31 @@
-import type { UserGender, UserRole } from '@/entities/auth';
-
 import type { RequestStatus } from '@/shared/types/redux';
 
-export interface ProfileState {
-  userInfo: UserInfoType | null;
-  profileStatuses: {
-    editProfile: RequestStatus;
-    changePassword: RequestStatus;
-  };
-  isEmailVerified: boolean;
-  isProfileComplete: boolean;
-}
-
-export type UserInfoType = {
-  id: string | null;
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   phoneNumber: string | null;
   avatarPath: string | null;
-  role: UserRole | null;
-  age: string | null;
+  role: UserRole;
+  age: number | null;
   country: string | null;
   aboutMe: string | null;
   gender: UserGender | null;
-};
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type UserRole = 'ADMIN' | 'USER';
+export type UserGender = 'MALE' | 'FEMALE';
+
+export interface ProfileState {
+  status: {
+    loadMe: RequestStatus;
+    editProfile: RequestStatus;
+    changePassword: RequestStatus;
+  };
+  userInfo: User | null;
+  isEmailVerified: boolean;
+  isProfileComplete: boolean;
+}

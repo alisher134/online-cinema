@@ -9,3 +9,5 @@ export const EDIT_PROFILE_MESSAGES = {
   editProfileSuccess: 'Successfully Edited Profile',
   changePasswordSuccess: 'Successfully Changed Password',
 } as const;
+
+export const USER_LS_KEY = 'user';

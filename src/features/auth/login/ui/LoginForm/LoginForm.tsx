@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { loginThunk, selectIsAuthLoading } from '@/entities/auth';
+import { selectIsAuthLoading } from '@/entities/auth';
+import { loginThunk } from '@/entities/auth/model/authThunks';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';

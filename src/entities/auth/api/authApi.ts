@@ -1,4 +1,4 @@
-import type { LoginFormFields } from '@/widgets/auth/login';
+import type { LoginFormFields } from '@/features/auth/login';
 
 import type { User } from '@/entities/profile';
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import type { ExtraArgument } from '@/app/providers/store';
 
-import type { LoginFormFields } from '@/widgets/auth/login';
+import type { LoginFormFields } from '@/features/auth/login';
 
 import { USER_LS_KEY } from '@/entities/profile';
 

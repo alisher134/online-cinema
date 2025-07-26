@@ -1,23 +1,16 @@
 import clsx from 'clsx';
 import type { TextareaHTMLAttributes } from 'react';
-import type { FieldError } from 'react-hook-form';
 
 import styles from './TextArea.module.scss';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
-  error?: FieldError;
-  label: string;
 }
 
-export const TextArea = ({ className, label, error, ...props }: TextAreaProps) => {
+export const TextArea = ({ className, name, ...props }: TextAreaProps) => {
   return (
     <div className={clsx(styles.wrapper, className)}>
-      <label htmlFor={label} className={styles.label}>
-        {label}
-      </label>
-      <textarea id={label} className={styles.textarea} {...props} />
-      {error && <p className={styles.error}>{error?.message}</p>}
+      <textarea id={name} className={styles.textarea} {...props} />
     </div>
   );
 };

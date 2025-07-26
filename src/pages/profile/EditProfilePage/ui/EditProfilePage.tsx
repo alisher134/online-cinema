@@ -1,5 +1,11 @@
 import { EditProfileForm } from '@/features/profile/edit-profile';
 
 export const EditProfilePage = () => {
-  return <EditProfileForm />;
+  return (
+    <section>
+      <h2>Edit Profile</h2>
+
+      <EditProfileForm />
+    </section>
+  );
 };

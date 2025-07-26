@@ -1,10 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { editProfileThunk, selectEditProfileLoading } from '@/entities/profile';
+import {
+  editProfileThunk,
+  selectIsEditProfileLoading,
+  selectIsLoadMeLoading,
+  selectUserInfo,
+} from '@/entities/profile';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
+import { FormControl } from '@/shared/ui/FormControl';
 import { Input } from '@/shared/ui/Input';
 import { Select } from '@/shared/ui/Select';
 import { TextArea } from '@/shared/ui/TextArea';
@@ -16,115 +22,90 @@ import type { EditProfileFormValues } from '../model/editProfileTypes';
 import styles from './EditProfileForm.module.scss';
 
 export const EditProfileForm = () => {
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector(selectUserInfo);
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EditProfileFormValues>({
+  const isLoadMeLoading = useAppSelector(selectIsLoadMeLoading);
+
+  const { control, handleSubmit } = useForm<EditProfileFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(editProfileSchema),
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.email,
-      avatarPath: user?.avatarPath,
-      phoneNumber: user?.phoneNumber,
-      age: user?.age,
-      aboutMe: user?.aboutMe,
-      country: user?.country,
-      gender: user?.gender,
+      avatarPath: user?.avatarPath ?? '',
+      phoneNumber: user?.phoneNumber ?? undefined,
+      age: user?.age ?? undefined,
+      aboutMe: user?.aboutMe ?? '',
+      country: user?.country ?? '',
+      gender: user?.gender ?? undefined,
     },
   });
 
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector(selectEditProfileLoading);
+  const isLoading = useAppSelector(selectIsEditProfileLoading);
 
   const onSubmit: SubmitHandler<EditProfileFormValues> = (data) => {
     dispatch(editProfileThunk(data));
   };
 
+  if (isLoadMeLoading) {
+    return <p>Loading</p>;
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Input
-        {...register('firstName')}
-        type="firstName"
-        placeholder="Enter your first name"
-        error={errors.firstName}
-        label="First Name"
-        className={styles.input}
-      />
+      <FormControl control={control} name="firstName" label="First Name" className={styles.input}>
+        {(field) => <Input {...field} type="text" placeholder="Enter your first name" />}
+      </FormControl>
 
-      <Input
-        {...register('lastName')}
-        type="lastName"
-        placeholder="Enter your last name"
-        error={errors.lastName}
-        label="Last Name"
-        className={styles.input}
-      />
+      <FormControl control={control} name="lastName" label="Last Name" className={styles.input}>
+        {(field) => <Input {...field} type="text" placeholder="Enter your last name" />}
+      </FormControl>
 
-      <Input
-        {...register('email')}
-        type="email"
-        placeholder="Enter your email address"
-        error={errors.email}
-        label="Email Address"
-        className={styles.input}
-      />
+      <FormControl control={control} name="email" label="Email Address" className={styles.input}>
+        {(field) => <Input {...field} type="email" placeholder="Enter your email address" />}
+      </FormControl>
 
-      <Input
-        {...register('age')}
-        type="number"
-        placeholder="Enter your age"
-        error={errors.age}
-        label="Age"
-        className={styles.input}
-      />
+      <FormControl control={control} name="age" label="Age" className={styles.input}>
+        {(field) => (
+          <Input
+            {...field}
+            onChange={(e) => field.onChange(e.target.valueAsNumber)}
+            type="number"
+            placeholder="Enter your age"
+          />
+        )}
+      </FormControl>
 
-      <Controller
-        name="gender"
-        control={control}
-        render={({ field }) => (
+      <FormControl control={control} name="gender" label="Gender" className={styles.input}>
+        {(field) => (
           <Select
             {...field}
-            error={errors.gender}
-            label="Gender"
             placeholder="Select your gender"
             options={SELECT_GENDER_DATA}
             className={styles.input}
           />
         )}
-      />
+      </FormControl>
 
-      <Input
-        {...register('country')}
-        type="string"
-        placeholder="Enter your country"
-        error={errors.country}
-        label="Country"
-        className={styles.input}
-      />
+      <FormControl control={control} name="country" label="Country" className={styles.input}>
+        {(field) => <Input {...field} placeholder="Enter your country" />}
+      </FormControl>
 
-      <TextArea
-        {...register('aboutMe')}
-        placeholder="Enter your about me"
-        error={errors.aboutMe}
-        label="About Me"
-        className={styles.input}
-      />
+      <FormControl control={control} name="aboutMe" label="About Me" className={styles.input}>
+        {(field) => <TextArea {...field} placeholder="Enter your about me" />}
+      </FormControl>
 
-      <Input
-        {...register('phoneNumber')}
-        type="number"
-        placeholder="Enter your phone number"
-        error={errors.phoneNumber}
+      <FormControl
+        control={control}
+        name="phoneNumber"
         label="Phone Number"
         className={styles.input}
-      />
+      >
+        {(field) => <Input {...field} type="tel" placeholder="Enter your phone number" />}
+      </FormControl>
 
       <ButtonLoader type="submit" size="lg" isLoading={isLoading} className={styles.button}>
         Edit Details

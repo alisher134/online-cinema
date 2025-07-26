@@ -1,35 +1,30 @@
 import clsx from 'clsx';
 import { ChevronUpIcon } from 'lucide-react';
 import { useState } from 'react';
-import type { FieldError } from 'react-hook-form';
 
 import type { SelectOption } from '../model/selectTypes';
 
 import styles from './Select.module.scss';
 
-interface SelectProps {
+interface SelectProps<T> {
   className?: string;
-  error?: FieldError;
-  label?: string;
-  options: SelectOption[];
-  onChange: (value: string) => void;
-  value?: string | null;
+  options: SelectOption<T>[];
+  onChange: (value: T) => void;
+  value?: T;
   placeholder: string;
 }
 
-export const Select = ({
+export const Select = <T extends string | number>({
   className,
-  label,
-  error,
   options,
   value,
   onChange,
   placeholder,
   ...props
-}: SelectProps) => {
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const handleOnChange = (value: string) => {
+  const handleOnChange = (value: T) => {
     onChange(value);
     setIsOpen(false);
   };
@@ -38,8 +33,6 @@ export const Select = ({
 
   return (
     <div className={clsx(styles.wrapper, className)}>
-      <label className={styles.label}>{label}</label>
-
       <div className={clsx(styles.inner, { [styles.open]: isOpen })}>
         <div className={styles.select} onClick={() => setIsOpen((prev) => !prev)} {...props}>
           <span className={styles.placeholder}>{getCurrentOption?.label ?? placeholder}</span>
@@ -63,8 +56,6 @@ export const Select = ({
 
         <ChevronUpIcon size={18} className={styles.icon} />
       </div>
-
-      {error && <p className={styles.error}>{error?.message}</p>}
     </div>
   );
 };

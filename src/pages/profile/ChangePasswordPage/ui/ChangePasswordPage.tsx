@@ -1,5 +1,11 @@
 import { ChangePasswordForm } from '@/features/profile/change-password';
 
 export const ChangePasswordPage = () => {
-  return <ChangePasswordForm />;
+  return (
+    <section>
+      <h2>Change Password</h2>
+
+      <ChangePasswordForm />
+    </section>
+  );
 };

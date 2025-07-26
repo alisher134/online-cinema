@@ -1,10 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { changePasswordThunk, selectChangePasswordLoading } from '@/entities/profile';
+import { changePasswordThunk, selectIsChangePasswordLoading } from '@/entities/profile';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
+import { FormControl } from '@/shared/ui/FormControl';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
 
 import { changePasswordSchema } from '../model/changePasswordSchema';
@@ -13,19 +14,14 @@ import type { ChangePasswordFormValues } from '../model/changePasswordTypes';
 import styles from './ChangePasswordForm.module.scss';
 
 export const ChangePasswordForm = () => {
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ChangePasswordFormValues>({
+  const { control, reset, handleSubmit } = useForm<ChangePasswordFormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(changePasswordSchema),
   });
 
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector(selectChangePasswordLoading);
+  const isLoading = useAppSelector(selectIsChangePasswordLoading);
 
   const onSubmit: SubmitHandler<ChangePasswordFormValues> = (data) => {
     dispatch(changePasswordThunk(data));
@@ -34,29 +30,32 @@ export const ChangePasswordForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <PasswordInput
-        {...register('oldPassword')}
-        placeholder="Enter your old password"
-        error={errors.oldPassword}
+      <FormControl
+        control={control}
+        name="oldPassword"
         label="Old Password"
         className={styles.input}
-      />
+      >
+        {(field) => <PasswordInput {...field} placeholder="Enter your old password" />}
+      </FormControl>
 
-      <PasswordInput
-        {...register('newPassword')}
-        placeholder="Enter your new password"
-        error={errors.newPassword}
+      <FormControl
+        control={control}
+        name="newPassword"
         label="New Password"
         className={styles.input}
-      />
+      >
+        {(field) => <PasswordInput {...field} placeholder="Enter your new password" />}
+      </FormControl>
 
-      <PasswordInput
-        {...register('confirmNewPassword')}
-        placeholder="Confirm your new password"
-        error={errors.confirmNewPassword}
+      <FormControl
+        control={control}
+        name="confirmNewPassword"
         label="Confirm New Password"
         className={styles.input}
-      />
+      >
+        {(field) => <PasswordInput {...field} placeholder="Conform your new password" />}
+      </FormControl>
 
       <ButtonLoader isLoading={isLoading} size="lg" className={styles.button}>
         Change Password

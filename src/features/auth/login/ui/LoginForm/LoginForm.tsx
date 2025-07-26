@@ -1,23 +1,24 @@
-import { type SubmitHandler, useFormContext } from 'react-hook-form';
-
-import type { LoginFormFields } from '@/widgets/auth/login';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { loginThunk, selectIsAuthLoading } from '@/entities/auth';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
+import { FormControl } from '@/shared/ui/FormControl';
 import { Input } from '@/shared/ui/Input';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
+
+import { loginSchema } from '../../model/loginSchema';
+import type { LoginFormFields } from '../../model/loginTypes';
 
 import styles from './LoginForm.module.scss';
 
 export const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useFormContext<LoginFormFields>();
+  const { handleSubmit, control, reset } = useForm({
+    mode: 'onChange',
+    resolver: zodResolver(loginSchema),
+  });
 
   const dispatch = useAppDispatch();
 
@@ -30,22 +31,13 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Input
-        {...register('email')}
-        type="email"
-        placeholder="Enter your email address"
-        error={errors.email}
-        label="Email Address"
-        className={styles.input}
-      />
+      <FormControl label="Email Address" name="email" control={control} className={styles.input}>
+        {(field) => <Input {...field} type="email" placeholder="Enter your email address" />}
+      </FormControl>
 
-      <PasswordInput
-        {...register('password')}
-        placeholder="Enter your password"
-        error={errors.password}
-        label="Password"
-        className={styles.input}
-      />
+      <FormControl label="Password" name="password" control={control} className={styles.input}>
+        {(field) => <PasswordInput {...field} placeholder="Enter your password" />}
+      </FormControl>
 
       <ButtonLoader isLoading={isLoading} size="full" className={styles.button}>
         Login

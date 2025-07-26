@@ -1,13 +1,4 @@
 .wrapper {
-  position: relative;
-
-  .label {
-    display: inline-block;
-    margin-bottom: 10px;
-    color: $color-gray-600;
-    font-size: 14px;
-  }
-
   .inner {
     display: flex;
     align-items: center;
@@ -34,13 +25,5 @@
       color: $color-gray-500;
       font-size: 14px;
     }
-  }
-
-  .error {
-    position: absolute;
-    color: $color-error;
-    font-size: 14px;
-    left: 0;
-    bottom: -33px;
   }
 }

@@ -1,23 +1,24 @@
-import { type SubmitHandler, useFormContext } from 'react-hook-form';
-
-import type { RegisterFormFields } from '@/widgets/auth/register';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { registerThunk, selectIsAuthLoading } from '@/entities/auth';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { ButtonLoader } from '@/shared/ui/Button';
+import { FormControl } from '@/shared/ui/FormControl';
 import { Input } from '@/shared/ui/Input';
 import { PasswordInput } from '@/shared/ui/PasswordInput';
+
+import { registerSchema } from '../../model/registerSchema';
+import type { RegisterFormFields } from '../../model/registerTypes';
 
 import styles from './RegisterForm.module.scss';
 
 export const RegisterForm = () => {
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useFormContext<RegisterFormFields>();
+  const { reset, control, handleSubmit } = useForm<RegisterFormFields>({
+    mode: 'onChange',
+    resolver: zodResolver(registerSchema),
+  });
 
   const dispatch = useAppDispatch();
 
@@ -31,48 +32,30 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Input
-        {...register('firstName')}
-        type="firstName"
-        placeholder="Enter your first name"
-        error={errors.firstName}
-        label="First Name"
-        className={styles.input}
-      />
+      <FormControl control={control} name="firstName" label="First Name" className={styles.input}>
+        {(field) => <Input {...field} type="text" placeholder="Enter your first name" />}
+      </FormControl>
 
-      <Input
-        {...register('lastName')}
-        type="lastName"
-        placeholder="Enter your last name"
-        error={errors.lastName}
-        label="Last Name"
-        className={styles.input}
-      />
+      <FormControl control={control} name="lastName" label="Last Name" className={styles.input}>
+        {(field) => <Input {...field} type="text" placeholder="Enter your last name" />}
+      </FormControl>
 
-      <Input
-        {...register('email')}
-        type="email"
-        placeholder="Enter your email address"
-        error={errors.email}
-        label="Email Address"
-        className={styles.input}
-      />
+      <FormControl control={control} name="email" label="Email Address" className={styles.input}>
+        {(field) => <Input {...field} type="email" placeholder="Enter your email address" />}
+      </FormControl>
 
-      <PasswordInput
-        {...register('password')}
-        placeholder="Enter your password"
-        error={errors.password}
-        label="Password"
-        className={styles.input}
-      />
+      <FormControl control={control} name="password" label="Password" className={styles.input}>
+        {(field) => <PasswordInput {...field} placeholder="Enter your password" />}
+      </FormControl>
 
-      <PasswordInput
-        {...register('confirmPassword')}
-        placeholder="Enter your password"
-        error={errors.confirmPassword}
+      <FormControl
+        control={control}
+        name="confirmPassword"
         label="Confirm Password"
         className={styles.input}
-      />
+      >
+        {(field) => <PasswordInput {...field} placeholder="Enter your password" />}
+      </FormControl>
 
       <ButtonLoader isLoading={isLoading} size="full" className={styles.button}>
         Register

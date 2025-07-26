@@ -1,1 +1,1 @@
-export { ChangePasswordPage } from './ui/ChangePasswordPage';
+export { ChangePasswordPage } from './ui/ChangePasswordPage.lazy';

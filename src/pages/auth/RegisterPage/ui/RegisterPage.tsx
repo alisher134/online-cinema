@@ -5,7 +5,7 @@ import { ROUTES } from '@/shared/config/routes';
 
 import styles from './RegisterPage.module.scss';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return (
     <section className={styles.register}>
       <h2 className={styles.title}>Register</h2>
@@ -16,3 +16,5 @@ export const RegisterPage = () => {
     </section>
   );
 };
+
+export default RegisterPage;

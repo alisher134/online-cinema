@@ -1,6 +1,6 @@
 import { EditProfileForm } from '@/features/profile/edit-profile';
 
-export const EditProfilePage = () => {
+const EditProfilePage = () => {
   return (
     <section>
       <h2>Edit Profile</h2>
@@ -9,3 +9,5 @@ export const EditProfilePage = () => {
     </section>
   );
 };
+
+export default EditProfilePage;

@@ -1,1 +1,1 @@
-export { DataPrivacyPage } from './ui/DataPrivacyPage';
+export { DataPrivacyPage } from './ui/DataPrivacyPage.lazy';

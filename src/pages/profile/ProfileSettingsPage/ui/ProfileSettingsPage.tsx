@@ -4,7 +4,7 @@ import { ProfileSidebar } from '@/widgets/Profile';
 
 import styles from './ProfileSettingsPage.module.scss';
 
-export const ProfileSettingsPage = () => {
+const ProfileSettingsPage = () => {
   return (
     <section className={styles.settings}>
       <div className={styles.inner}>
@@ -17,3 +17,5 @@ export const ProfileSettingsPage = () => {
     </section>
   );
 };
+
+export default ProfileSettingsPage;

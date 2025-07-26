@@ -1,6 +1,6 @@
 import { ChangePasswordForm } from '@/features/profile/change-password';
 
-export const ChangePasswordPage = () => {
+const ChangePasswordPage = () => {
   return (
     <section>
       <h2>Change Password</h2>
@@ -9,3 +9,5 @@ export const ChangePasswordPage = () => {
     </section>
   );
 };
+
+export default ChangePasswordPage;

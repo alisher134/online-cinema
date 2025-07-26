@@ -1,6 +1,8 @@
 import { type ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 
+import { CookiesConsent } from '@/widgets/CookiesConsent';
+
 import { AuthProvider } from './auth';
 import { StoreProvider } from './store';
 
@@ -13,6 +15,7 @@ export const Providers = ({ children }: ProvidersProps) => {
     <StoreProvider>
       <AuthProvider>
         {children}
+        <CookiesConsent />
         <Toaster />
       </AuthProvider>
     </StoreProvider>

@@ -2,7 +2,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import { getAccessTokenFromCookies } from '../lib/cookies';
 
-import { loginThunk, logoutThunk, registerThunk } from './thunks';
+import { loginBySocial, loginThunk, logoutThunk, registerThunk } from './thunks';
 import type { AuthState } from './types';
 
 const initialState: AuthState = {
@@ -20,27 +20,38 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addMatcher(
-      isAnyOf(loginThunk.pending, registerThunk.pending, logoutThunk.pending),
+      isAnyOf(
+        loginThunk.pending,
+        registerThunk.pending,
+        logoutThunk.pending,
+        loginBySocial.pending,
+      ),
       (state) => {
         state.authStatus = 'pending';
         state.isAuth = false;
       },
     );
 
-    builder.addMatcher(isAnyOf(loginThunk.fulfilled, registerThunk.fulfilled), (state) => {
-      state.authStatus = 'success';
-      state.isAuth = true;
-    });
+    builder.addMatcher(
+      isAnyOf(loginThunk.fulfilled, registerThunk.fulfilled, loginBySocial.fulfilled),
+      (state) => {
+        state.authStatus = 'success';
+        state.isAuth = true;
+      },
+    );
 
     builder.addMatcher(isAnyOf(logoutThunk.fulfilled), (state) => {
       state.authStatus = 'success';
       state.isAuth = false;
     });
 
-    builder.addMatcher(isAnyOf(loginThunk.rejected, registerThunk.rejected), (state) => {
-      state.authStatus = 'failed';
-      state.isAuth = false;
-    });
+    builder.addMatcher(
+      isAnyOf(loginThunk.rejected, registerThunk.rejected, loginBySocial.rejected),
+      (state) => {
+        state.authStatus = 'failed';
+        state.isAuth = false;
+      },
+    );
 
     builder.addMatcher(isAnyOf(logoutThunk.rejected), (state) => {
       state.authStatus = 'failed';

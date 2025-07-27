@@ -47,6 +47,10 @@ export const ROUTES = {
       route: 'register',
       page: '/auth/register',
     },
+    bySocial: {
+      route: 'by-social',
+      page: '/auth/by-social',
+    },
   },
   help: {
     route: 'help',

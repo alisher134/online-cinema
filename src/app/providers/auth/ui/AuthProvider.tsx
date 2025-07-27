@@ -11,11 +11,11 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const dispatch = useAppDispatch();
+  const accessToken = getAccessTokenFromCookies();
 
   useEffect(() => {
-    const accessToken = getAccessTokenFromCookies();
     if (accessToken) dispatch(loadMeThunk());
-  }, [dispatch]);
+  }, [accessToken, dispatch]);
 
   return <>{children}</>;
 };

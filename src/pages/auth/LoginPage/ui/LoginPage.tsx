@@ -1,3 +1,4 @@
+import { GoogleLoginButton } from '@/features/auth/by-social';
 import { LoginForm } from '@/features/auth/login';
 import { AuthSwitch } from '@/features/auth/ui';
 
@@ -9,6 +10,10 @@ const LoginPage = () => {
   return (
     <section className={styles.login}>
       <h2 className={styles.title}>Hey there, welcome back</h2>
+
+      <div className={styles['social-wrapper']}>
+        <GoogleLoginButton />
+      </div>
 
       <LoginForm />
 

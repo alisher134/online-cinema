@@ -4,7 +4,7 @@ import type { ExtraArgument } from '@/app/providers/store';
 
 import type { LoginFormFields } from '@/features/auth/login';
 
-import { USER_LS_KEY } from '@/entities/profile';
+import { USER_LS_KEY, loadMeThunk } from '@/entities/profile';
 
 import { ROUTES } from '@/shared/config/routes';
 import { removeFromLS } from '@/shared/helpers/local-storage';
@@ -29,6 +29,23 @@ export const loginThunk = createAsyncThunk<AuthResponse, LoginFormFields, { extr
       router.navigate(ROUTES.appRoute);
 
       return data;
+    } catch (error) {
+      toast.error(errorHandler(error));
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const loginBySocial = createAsyncThunk<void, string, { extra: ExtraArgument }>(
+  'auth/bySocial',
+  async (accessToken, { dispatch, rejectWithValue, extra: { router, toast } }) => {
+    try {
+      setAccessTokenToCookie(accessToken);
+
+      await dispatch(loadMeThunk()).unwrap();
+
+      toast.success(AUTH_MESSAGES.loginSuccess);
+      router.navigate(ROUTES.appRoute);
     } catch (error) {
       toast.error(errorHandler(error));
       return rejectWithValue(error);

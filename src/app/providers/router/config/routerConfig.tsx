@@ -6,6 +6,7 @@ import { MainLayout } from '@/app/layouts/MainLayout';
 import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { RegisterPage } from '@/pages/auth/RegisterPage';
+import { SocialAuth } from '@/pages/auth/SocialAuth';
 import { ChangePasswordPage } from '@/pages/profile/ChangePasswordPage';
 import { DataPrivacyPage } from '@/pages/profile/DataPrivacyPage';
 import { EditProfilePage } from '@/pages/profile/EditProfilePage';
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.auth.register.route,
         Component: RegisterPage,
+      },
+      {
+        path: ROUTES.auth.bySocial.route,
+        Component: SocialAuth,
       },
     ],
   },

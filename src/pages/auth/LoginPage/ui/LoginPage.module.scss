@@ -2,5 +2,25 @@
   .title {
     text-align: center;
     margin-top: 60px;
+    margin-bottom: 30px;
+  }
+
+  .social-wrapper {
+    position: relative;
+    padding-bottom: 27px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $color-gray-650;
+
+    &::after {
+      content: 'Or login with';
+      position: absolute;
+      left: 50%;
+      background: $color-gray-900;
+      font-size: 14px;
+      padding: 0 15px;
+      transform: translateX(-50%);
+      bottom: -7px;
+      color: $color-gray-600;
+    }
   }
 }
